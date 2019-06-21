@@ -1,0 +1,27 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Dashboard</h2>
+    <br><hr>
+    <div class="row">
+
+    	<div class="col-lg-6 col-md-10 mx-auto">
+
+    		<h4>Issues not assigned</h4>
+    		<ul class="list-group">
+			  <%  if( projectNames1 ) { for( var i=0;i<projectNames1.length;i++ ){ %>
+              <li class="list-group-item"><a href="/issue/fullissueview/<%=projectNames1[i]._id%>">
+                <%=projectNames1[i].desc%>
+              </a></li>
+            <% } } %>
+      </ul>
+      
+      <a href="/user/register" class="btn" id="sendMessageButton">Add a user</a>
+    	</div>
+
+    </div>
+</div>
+
+
+<% include ./footer %>

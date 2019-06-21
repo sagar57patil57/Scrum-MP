@@ -1,0 +1,54 @@
+<% include ./header %>
+
+<div class="container">
+	<br>
+    <h2 style="text-align:center;">All Issue List</h2>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+      	<form method="POST" action="/issue/view/all">
+		<div class="md-form">
+            <input type="text" name="search" class="form-control" placeholder="Search" id="search">
+        </div>
+      	</form>
+    	<br>
+      	<h5> <i class="fab fa-searchengin"></i>&nbsp; Results</h5><br>
+		<ul class="list-group">
+		<% if(issues) { for(var i=0 ; i<issues.length ; i++) { %>
+			<li class="list-group-item"> <a href="/issue/fullissueview/<%=issues[i]._id%>" > <%= issues[i].desc %></a>
+				
+
+				<% if( issues[i].issuetype.toString() === 'Bug' ){ %>
+					<span style="margin-left:10px;" class="float-right badge badge-danger">
+						<%= issues[i].issuetype %> 
+					</span>
+				<% } else if( issues[i].issuetype.toString() === 'Task' ){ %>
+					<span style="margin-left:10px;" class="float-right badge badge-success">
+						<%= issues[i].issuetype %> 
+					</span>
+				<% } else if( issues[i].issuetype.toString() === 'Story' ){ %>
+					<span style="margin-left:10px;" class="float-right badge badge-warning">
+						<%= issues[i].issuetype %> 
+					</span>
+				<% } else if( issues[i].issuetype.toString() === 'Improvement' ){ %>
+					<span style="margin-left:10px;" class="float-right badge badge-default">
+						<%= issues[i].issuetype %> 
+					</span>
+				<% } else if( issues[i].issuetype.toString() === 'New Feature' ){ %>
+					<span style="margin-left:10px;" class="float-right badge badge-primary">
+						<%= issues[i].issuetype %> 
+					</span>
+				<% } %>
+
+
+
+					<span class="float-right badge badge-pill badge-default"> <%= issues[i].priority %> </span>
+		  		</li>
+		<% } } %>
+		</ul>
+	</div>
+
+	</div>
+</div>
+
+
+<% include ./footer %>

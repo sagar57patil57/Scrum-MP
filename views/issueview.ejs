@@ -1,0 +1,76 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">All Issue List</h2>
+    <hr/><br/>
+    <div class="row">
+      <div class="col-lg-3 col-md-10 mx-auto">
+
+      	<h5> <i class="fas fa-list"></i>&nbsp; Todo</h5>
+		<ul class="list-group">
+		<% for(var i=0 ; i<projectNames.length ; i++) { %>
+			<% for(var j=0 ; j<projectNames[i].issue.length ; j++) { %>
+		  		<% if( projectNames[i].issue[j].status === 'todo' ){ %>
+		  		<li class="list-group-item"> <a href="/issue/fullissueview/<%=projectNames[i].issue[j]._id%>" > <%= projectNames[i].issue[j].summary %></a> 
+		  			<span class="float-right badge badge-danger"> <%= projectNames[i].issue[j].issuetype %> </span> 
+		  		</li>
+			<% } %>
+			<% } %>
+		<% } %>
+		</ul>
+		<br/>
+	</div>
+
+	<div class="col-lg-3 col-md-10 mx-auto">
+
+		<h5><i class="fas fa-spinner"></i>&nbsp; Progress</h5>
+		<ul class="list-group">
+		<% for(var i=0 ; i<projectNames.length ; i++) { %>
+			<% for(var j=0 ; j<projectNames[i].issue.length ; j++) { %>
+		  		<% if( projectNames[i].issue[j].status === 'progress' ){ %>
+		  		<li class="list-group-item"> <a href="/issue/fullissueview/<%=projectNames[i].issue[j]._id%>" > <%= projectNames[i].issue[j].summary %> </a> <span class="float-right badge badge-warning"> <%= projectNames[i].issue[j].issuetype %> </span> </li>
+			<% } %>
+			<% } %>
+		<% } %>
+		</ul>
+		<br/>
+	</div>
+
+	<div class="col-lg-3 col-md-10 mx-auto">
+
+		<h5><i class="fas fa-check-circle"></i> &nbsp;Done</h5>
+		<ul class="list-group">
+		<% for(var i=0 ; i<projectNames.length ; i++) { %>
+			<% for(var j=0 ; j<projectNames[i].issue.length ; j++) { %>
+		  		<% if( projectNames[i].issue[j].status === 'done' ){ %>
+		  		<li class="list-group-item"> <a href="/issue/fullissueview/<%=projectNames[i].issue[j]._id%>" >  <%= projectNames[i].issue[j].summary %> <span class="float-right badge badge-success"> <%= projectNames[i].issue[j].issuetype %> </a> </span> </li>
+			<% } %>
+			<% } %>
+		<% } %>
+		</ul>
+		<br/>
+	</div>
+
+	<div class="col-lg-3 col-md-10 mx-auto">
+
+		<h5><i class="fas fa-times-circle"></i>&nbsp; Unassigned</h5>
+		<ul class="list-group">
+		<% for(var i=0 ; i<projectNames.length ; i++) { %>
+			<% for(var j=0 ; j<projectNames[i].issue.length ; j++) { %>
+		  		<% if( projectNames[i].issue[j].status === 'unassigned' ){ %>
+		  		<li class="list-group-item"> <a href="/issue/fullissueview/<%=projectNames[i].issue[j]._id%>" >  <%= projectNames[i].issue[j].summary %> <span class="float-right badge badge-light"> <%= projectNames[i].issue[j].issuetype %> </a> </span> </li>
+			<% } %>
+			<% } %>
+		<% } %>
+		</ul>
+		<br/>
+	</div>
+
+
+
+	</div>
+</div>
+
+
+<% include ./footer %>

@@ -1,0 +1,7 @@
+set port vars and add Procfile
+mlab make db, then make a user and set its username and pwd in the link provided by mlabs
+add addon to herokuapp
+cd and herokulogin
+git init
+remote add
+and remaining commands like push provided in heroku interface serially...

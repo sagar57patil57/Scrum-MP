@@ -1,0 +1,34 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Project Create</h2>
+    <br>
+    <div class="row">
+      <div class="col-lg-4 col-md-10 mx-auto">
+
+        <form method="POST" action="/project/create">
+          <div class="md-form">
+            <input type="text" name="name" class="form-control" placeholder="Name" id="name">
+          </div>
+        <div class="form-group">
+			  <label for="scrum">Team Leader : </label>
+			  <select class="form-control" id="leader" name="leader">
+              <% 
+              if(users) {
+              for( var i=0;i<users.length;i++ ){ %>
+              <option><%= users[i].username %></option>
+              <% }
+              } %>
+			  </select>
+			</div>
+          <div class="md-form">
+            <button type="submit" class="btn" id="sendMessageButton">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <% include ./footer %>

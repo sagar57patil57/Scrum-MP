@@ -1,0 +1,81 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Name of Project : <b> <%= project.name%> </b> </h2>
+    <p style="text-align:center">[ Lead by <b><%= project.leader%> ]</b></p>
+    <br><hr>
+    <div class="row">
+      <div class="col-lg-4 col-md-10">
+
+    <h3>Pie Chart Stats</h3><br/>
+		<canvas id="pieChart"></canvas><br/><hr/>
+
+		
+
+    </div>
+    <div class="col-lg-4 col-md-10">
+
+        <h3>Backlog's</h3><br/>		
+
+        <ul class="list-group">
+        <% for(var i=0 ; i<project.issue.length ; i++) { %>
+          <li class="list-group-item"><a href="/issue/fullissueview/<%=project.issue[i]._id%>"> <%= project.issue[i].summary %> </a> <span class="float-right badge badge-danger" style="margin-left:4px;"> <%= project.issue[i].sprint %> </span>  <span class="float-right badge badge-default"> <%= project.issue[i].issuetype %> </span></li>	
+        <% } %>
+        </ul>
+  
+        <br><br>
+      
+    </div>
+
+    <div class="col-lg-4 col-md-10">
+        <div>
+            <h3>Create a sprint</h3><br/>
+          <form method="POST" action="/sprint/create/<%= projid %>">
+            <input type="text" name="spName" placeholder="sprint" 
+            class="form-control"/>
+            <input type="text" name="spDur" value="2 weeks" 
+            class="form-control"/>
+            <input type="date" name="spStartDate" 
+            class="form-control"/>
+            <input type="date" name="spEndDate" placeholder="sprint" 
+            class="form-control"/>
+    
+            <div class="md-form">
+              <button type="submit" class="btn" id="sendMessageButton">Create</button>
+            </div>
+          </form>
+    
+          <br/><h3>Existing sprints</h3><br/>
+          <ul class="list-group">
+            <% if(project.sprints.length) { %>
+              <% for(var i=0 ; i<project.sprints.length ; i++) { %>
+                <li class="list-group-item"><a href="/sprint/view/<%= project.sprints[i].spName %>/<%= project._id %>"> <%= project.sprints[i].spName %> </a></li>	
+              <% } }%>
+            </ul>
+        </div>
+    </div>
+	</div>
+</div>
+
+<% include ./footer %>
+
+<script>
+  //pie
+  var ctxP = document.getElementById("pieChart").getContext('2d');
+  var myPieChart = new Chart(ctxP, {
+    type: 'pie',
+    data: {
+      labels: ["Bugs", "Tasks", "Story", "New Features", "Improvement"],
+      datasets: [{
+        data: [<%= stats.bugcount %>, <%= stats.taskcount %>, <%= stats.storycount %>, <%= stats.featurecount %>, <%= stats.improvecount %>],
+        backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+</script>

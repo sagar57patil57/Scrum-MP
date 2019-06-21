@@ -1,0 +1,95 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Issue Create</h2>
+    <br>
+    <div class="row">
+      <div class="col-lg-4 col-md-10 mx-auto">
+
+        <form method="POST" action="/issue/create">
+          
+
+          <div class="md-form">
+            <input type="text" id="desc" name="desc" class="form-control">
+            <label for="desc">Description</label>
+          </div>
+
+
+          <div class="form-group">
+            <label for="projectname">Project Name</label>
+            <select class="form-control" id="projectname" name="projectname">
+              <% 
+              if(project) {
+              for( var i=0;i<project.length;i++ ){ %>
+              <option><%= project[i].name %></option>
+              <% } 
+              } %>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="issuetype">Issue type</label>
+            <select class="form-control" id="issuetype" name="issuetype">
+              <option>Bug</option>
+              <option>Task</option>
+              <option>Story</option>
+              <option>New Feature</option>
+              <option>Improvement</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="priority">Priority</label>
+            <select class="form-control" id="priority" name="priority">
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+              <option>Very High</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" name="status">
+              <option>unassigned</option>
+              <option>todo</option>
+              <option>progress</option>
+              <option>done</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="assgnto">Assigned To</label>
+            <select class="form-control" id="assgnto" name="assgnto">
+              <option>none</option>
+              <% 
+              if(project) {
+              for( var i=0;i<users.length;i++ ){ %>
+              <option><%= users[i].username %></option>
+              <% }
+              } %>
+            </select>
+          </div>
+
+
+          <div class="md-form">
+            <textarea id="form7" name="summary" class="md-textarea form-control" rows="3"></textarea>
+            <label for="form7">Summary</label>
+          </div>
+
+
+          <div class="md-form">
+            <button type="submit" class="btn" id="sendMessageButton">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <% include ./footer %>

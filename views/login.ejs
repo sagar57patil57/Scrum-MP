@@ -1,0 +1,25 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Login Form</h2>
+    <br><br>
+    <div class="row">
+      <div class="col-lg-4 col-md-10 mx-auto">
+        <form method="POST" action="/user/login">
+          <div class="md-form">
+            <input type="email" name="email" class="form-control" placeholder="Email" id="email">
+          </div>
+          <div class="md-form">
+              <input type="password" name="pwd" class="form-control" placeholder="Password" id="password">
+          </div>
+          <div id="success"></div>
+          <div class="md-form text-center">
+            <button type="submit" class="btn" id="sendMessageButton">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <% include ./footer %>

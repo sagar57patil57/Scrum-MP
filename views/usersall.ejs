@@ -1,0 +1,31 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Users</h2>
+    <br>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    	<br>
+      	<h5> <i class="fab fa-searchengin"></i>&nbsp; Results</h5><br>
+		<ul class="list-group">
+		<% for( var i=0;i<user.length;i++ ) { %>
+			<li class="list-group-item">
+				<a href="/user/profile/<%=user[i]._id%>"> 
+				<% if(!user[i].profilepic){ %>
+				<img src="https://img.icons8.com/color/30/000000/circled-user-male-skin-type-4.png"> 
+				<% } else {%>
+				<img src="<%= user[i].profilepic %>" style="height:50px;width:50px;">
+				&nbsp;
+				<%= user[i].username %> </a>
+				<% } %>
+		  	</li>
+		 <% } %>
+		</ul>
+	</div>
+
+	</div>
+</div>
+
+
+<% include ./footer %>

@@ -1,0 +1,131 @@
+<% include ./header %>
+
+<% if(project.issue.length){ for(var i=0;i<project.issue.length;i++) { %>
+
+<% if(project.issue[i]._id.toString() === theKey.issue_id.toString()) { %>
+
+
+<div class="container">
+	<br><br>
+    <h3 style="text-align:center;"><%= project.issue[i].summary %>
+		<% if( project.issue[i].status === 'todo' ){ %>    	
+    		<span class="badge badge-pill badge-danger"><%=project.issue[i].status%></span>
+   		<% } else if( project.issue[i].status === 'progress' ){ %>
+   			<span class="badge badge-pill badge-warning"><%=project.issue[i].status%></span>
+   		<% } else if( project.issue[i].status === 'done' ){ %>
+   			<span class="badge badge-pill badge-success"><%=project.issue[i].status%></span>
+   		<% } else if( project.issue[i].status === 'progress' ){ %>
+   			<span class="badge badge-pill badge-light"><%=project.issue[i].status%></span>
+   		<% } %>
+    </h3>
+    <br>
+    <div class="row">
+
+    	<div class="col-lg-8 col-md-10 mx-auto">
+
+	      	<ul class="list-group">
+				  <li class="list-group-item">Belongs to : <b><%= project.name %></b></li>
+				  <li class="list-group-item">Assigned to : <b><%= project.issue[i].assgnto %></b></li>
+				  <li class="list-group-item">Lead by : <b><%= project.leader %></b></li>
+				  <li class="list-group-item">priority : <b><%= project.issue[i].priority %></b></li>
+				  <li class="list-group-item">Issue type : <b><%= project.issue[i].issuetype %></b></li>
+				  <li class="list-group-item"> Desc : <%= project.issue[i].desc %></li>
+				  <li class="list-group-item"> Summery : <b><%= project.issue[i].summary %></b></li>
+			</ul>
+			<br>
+		</div>
+
+      <div class="col-lg-4 col-md-10 mx-auto">
+
+		<form method="POST" action="/issue/changestatus/<%=project.issue[i]._id%>">
+			<div class="form-group">
+				  <label for="status">Change status</label>
+				  <select class="form-control" id="status" name="status">
+				    <option>todo</option>
+				    <option>progress</option>
+				    <option>done</option>
+				  </select>
+			</div>
+			<button type="submit" class="btn btn-sm" id="sendMessageButton">Change</button>
+		</form>
+		<br>
+
+		<% if( session.userId.toString() === '5cbb61dcd02c321d1d03cf1e' ) {  %>
+		<form method="POST" action="/issue/assign/<%=project.issue[i]._id%>">
+			<div class="form-group">
+				  <label for="assign">Assign to</label>
+				  <select class="form-control" id="assign" name="email">
+				    <% if( user ){ for(var p=0;p<user.length;p++) { %>
+				    <option> <%= user[p].email %> </option>
+				  	<% } } %>
+				  </select>
+			</div>
+			<button type="submit" class="btn btn-sm" id="sendMessageButton">Assign</button>
+		</form>
+		<% } %>
+		<br/>
+
+		<% if( session.userId.toString() === '5cbb61dcd02c321d1d03cf1e' ) {  %>
+			<form method="POST" action="/issue/setsprint/<%=project.issue[i]._id%>">
+				<div class="form-group">
+					  <label for="assign">Add to sprint</label>
+					  <select class="form-control" id="assign" name="sprintName">
+						<% if( project.sprints.length ){ for(var p=0;p<project.sprints.length;p++) { %>
+						<option> <%= project.sprints[p].spName %> </option>
+						  <% } } %>
+					  </select>
+				</div>
+				<button type="submit" class="btn btn-sm" id="sendMessageButton">Set</button>
+			</form>
+			<% } %>
+
+		</div>
+
+	</div>
+	<br>
+
+
+<h5><i class="fas fa-comments"></i>&nbsp; Add a comment</h5>
+<div class="container">
+	<div class="row">
+
+		<form method="POST" action="/issue/comment/<%=project._id%>/<%=project.issue[i]._id%>">
+		<div class="md-form">
+		  <textarea id="comment" name="comment" class="md-textarea form-control" rows="1" cols="80"></textarea>
+		  <label for="comment">Comment</label>
+		</div>
+		<button type="submit" class="btn btn-sm" id="sendMessageButton" >Comment</button>
+		</form>
+
+	</div>
+</div>
+</div>
+
+<br><br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-10 col-md-8">
+			<% for(var j=0;j<project.issue[i].comments.length;j++) { %>
+
+				<div class="card">
+				  <div class="card-header  deep-purple lighten-1 text-white"> 
+				  	<img src="https://img.icons8.com/bubbles/30/000000/administrator-male.png">
+				  	<%= project.issue[i].comments[j].username %> 
+				  </div> 
+				  <div class="card-body"> <%= project.issue[i].comments[j].comment %> </div>
+				</div>
+				<br>
+
+		<% } %>
+		</div>
+	</div>
+</div>
+
+
+
+<% } %>
+<% } }%>
+
+
+<% include ./footer %>

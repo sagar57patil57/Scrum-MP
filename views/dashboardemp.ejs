@@ -1,0 +1,38 @@
+<% include ./header %>
+
+<div class="container">
+	<br><br>
+    <h2 style="text-align:center;">Dashboard</h2>
+    <br><hr>
+    <div class="row">
+
+    	<div class="col-lg-6 col-md-10 mx-auto">
+
+    		<h4>Issues assigned to me</h4>
+    		<ul class="list-group">
+    		<%  if( projectNames2 ) { for( var i=0;i<projectNames2.length;i++ ){ %>
+			  <li class="list-group-item"><a href="/issue/fullissueview/<%=projectNames2[i]._id%>">
+			  	<%=projectNames2[i].desc%>
+			  </a></li>
+			<% } } %>
+			</ul>
+
+    	</div>
+    	<div class="col-lg-6 col-md-10 mx-auto">
+
+    		<h4>Issues Reported by me</h4>
+    		<ul class="list-group">
+    		<%  if( projectNames1 ) { for( var i=0;i<projectNames1.length;i++ ){ %>
+			  <li class="list-group-item"><a href="/issue/fullissueview/<%=projectNames1[i]._id%>">
+			  	<%=projectNames1[i].desc%>
+			  </a></li>
+			<% } } %>
+			</ul>
+
+    	</div>
+
+    </div>
+</div>
+
+
+<% include ./footer %>
