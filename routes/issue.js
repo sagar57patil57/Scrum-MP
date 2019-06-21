@@ -88,7 +88,7 @@ router.post('/create',async (req, res)=>{
         service: 'Gmail',
         auth: {
             user: 'sagar57patil57@gmail.com',
-            pass: 'sagarkomal'
+            pass: 'PASSWORD'
         }
     });
 
@@ -181,7 +181,7 @@ router.post('/assign/:issueid',async (req, res)=>{	//assign issue to user
 	    service: 'Gmail',
 	    auth: {
 	        user: 'sagar57patil57@gmail.com',
-	        pass: 'sagarkomal'
+	        pass: 'PASSWORD'
 	    }
 	});
 
