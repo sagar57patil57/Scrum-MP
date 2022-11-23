@@ -23,7 +23,7 @@
     "mongodb": "^3.2.2",
     "mongoose": "^5.4.20",
     "nodemailer": "^6.0.0",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.5.0",
     "uuid": "^3.3.2"
   }
 }
